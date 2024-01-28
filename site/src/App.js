@@ -1,17 +1,28 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Pages } from './pages/Pages.js';
+import {useState, useEffect} from 'react';
+import LoginPage from "./pages/Login/LoginPage";
+import AppPage from "./pages/App/AppPage";
+import NotFoundPage from "./pages/NotFound/NotFoundPage";
 import './App.css';
 
+
 function App() {
-  return (
-    <Router>
-      <Routes>
-        {Pages.map(page => <Route key={page.id} 
-                                    path={page.path} 
-        element={page.component} />)}
-      </Routes>
-    </Router>
-  );
+  const [c, setC] = useState(<></>);
+
+  const handleNavigation = (link) => {
+    if(link === 'app'){
+      setC(<AppPage navHandler={handleNavigation}/>);
+    } else if(link === '/'){
+      setC(<LoginPage navHandler={handleNavigation}/>);
+    } else {
+      setC(<NotFoundPage/>);
+    }
+  }
+
+  useEffect(()=>{
+    setC(<LoginPage navHandler={handleNavigation}/>);
+  },[]);
+
+  return c;
 }
 
 export default App;
