@@ -1,0 +1,27 @@
+.section2-map{
+    text-align: center;
+    margin-top: 50px;
+}
+.section2-map a,
+.section2-map-icon{
+    color: rgb(50,50,50);
+    transition: all .5s;
+}
+.section2-map a:hover,
+.section2-map-icon:hover{
+    color: rgb(230,230,230);
+}
+.section2-map-icon{
+    margin-bottom:10px;
+}
+
+.hp-content-section2 h3{
+    margin: 40px 0;
+}
+
+.semana{
+    border: 1px solid rgb(130,130,130);
+    border-radius:10px;
+    padding:20px 0;
+    text-align: center;
+}

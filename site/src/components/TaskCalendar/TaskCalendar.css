@@ -1,0 +1,72 @@
+::-webkit-scrollbar {
+    height: 5px;
+}
+.task-calendar-wrap{
+    min-width:500px;
+    font-size: 14px;
+}
+
+.task-calendar-wrap .row{
+    margin: 0 1px;
+}
+.task-calendar-days-col{
+    overflow-x: scroll;
+    text-align: center;
+}
+.task-calendar-days-col>.row{
+    width:500%;
+}
+.task-calendar-days-col div{
+    padding-left: 1px;
+    padding-right: 1px;
+}
+.task-calendar-day-col{
+    border-left: 1px solid rgb(200,200,200);
+}
+.task-calendar-trow{
+    height:60px;
+    text-align: center;
+    align-items: center;
+}
+.task-calendar-tasks-desc{
+    text-orientation: mixed;
+    writing-mode: vertical-rl;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    transform: rotate(180deg);
+}
+.task-calendar-tasks-desc,
+.task-calendar-tasks-mark{
+    border: 1px solid rgb(240,240,240);
+    font-size: 11px;
+    width: 100px;
+    text-align: center;
+    padding: 3px 0
+}
+.task-calendar-tasks-mark,
+.task-calendar-tmname{
+    height: 30px;
+}
+.task-calendar-tmname{
+    border-bottom: 1px solid rgb(240,240,240);
+}
+.task-calendar-title{
+    text-align: center;
+}
+.task-calendar-filters{
+    margin:0 0 20px 0 !important;
+}
+.task-calendar-tasks-mark{
+    color: rgb(8, 141, 8);
+    transition: all .2s;
+}
+.task-calendar-tasks-mark:hover{
+    background-color: rgb(225,225,225);
+    color: rgb(155, 11, 11);
+    cursor:pointer;
+}
+.task-calendar-tasks-marks-row:hover{
+    background-color: rgb(240,240,240);
+    cursor:pointer;
+}

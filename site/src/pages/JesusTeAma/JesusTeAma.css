@@ -1,0 +1,12 @@
+.jta-desc{
+    font-size: 35px;
+    text-align: center;
+
+}
+.jta-content{
+    margin: 0 10%;
+}
+.jta-content a{
+    color: rgb(50,50,50);
+    text-decoration: underline;
+}

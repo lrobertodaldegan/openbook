@@ -1,0 +1,12 @@
+.to-top-button{
+    color:rgb(180,180,180);
+    position:fixed;
+    bottom: 50px;
+    right: 50px;
+    background-color: transparent;
+    border:none;
+    cursor: pointer;
+}
+.to-top-button:hover{
+    color:rgb(20,20,20);
+}

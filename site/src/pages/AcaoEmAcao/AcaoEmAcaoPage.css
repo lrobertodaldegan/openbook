@@ -1,0 +1,33 @@
+#acao-em-acao-content {
+    text-align: center;
+    transition: all 1s;
+}
+.acao-em-acao-desc{
+    padding:0 10%;
+}
+.acao-em-acao-desc p{
+    font-size: 20px;
+    text-align: justify;
+}
+.acao-em-acao-members{
+    margin-bottom:100px;
+}
+.acao-em-acao-members svg,
+.acao-em-acao-members img{
+    margin:10px 0 !important;
+}
+.acao-em-acao-members p{
+    margin: 0;
+}
+.acao-em-acao-content a{
+    color:rgb(250,250,250);
+}
+.acao-em-acao-members img{
+    height: 250px;
+    border-radius: 50%;
+}
+.acao-em-acao-main-logo img{
+    height: 150px;
+    margin:100px 0;
+    filter: invert(100%);
+}

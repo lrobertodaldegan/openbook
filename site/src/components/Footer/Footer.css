@@ -1,0 +1,34 @@
+.hp-content-footer{
+    background: rgb(0,0,0);                          ;
+    min-height: 500px;
+    color: rgb(250,250,250);
+    padding: 155px 10% 10px 10%;
+    align-items: center;
+    text-align: center;
+}
+.footer-head{
+    margin-bottom: 10px;
+}
+.footer-head img{
+    height: 130px;
+    filter:invert(100%);
+}
+.footer-infos{
+    margin-bottom: 100px;
+}
+.footer-infos-desc p{
+    text-align: justify;
+    font-size: 14px;
+}
+.footer-infos-offer img{
+    height: 200px;
+    transition: all .5s;
+}
+.footer-infos-offer img:hover{
+    height: 300px;
+    cursor: none;
+}
+.hp-content-footer small{
+    font-size: 11px;
+    color: rgb(200,200,200);
+}

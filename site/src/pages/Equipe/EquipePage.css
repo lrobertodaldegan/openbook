@@ -1,0 +1,32 @@
+.team-content{
+    background-color: rgb(250,250,250);
+}
+.team-content div{
+    padding-left: .5%;
+    padding-right: .5%;
+}
+.team-actions-wrap{
+    padding-bottom: 200px;
+}
+
+.team-menu-wrap{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 0;
+    background: rgb(240,240,240);
+    color: rgb(200,200,200);
+}
+.team-menu-opt a{
+    color: rgb(100,100,100);
+    opacity: .5;
+    transition: all .5s;
+}
+.team-menu-opt a:hover{
+    color: rgb(10,10,10);
+    opacity: 1;
+}
+.team-menu-opt{
+    text-align: center;
+    font-size: 12px;
+}

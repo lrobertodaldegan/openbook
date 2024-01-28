@@ -1,0 +1,51 @@
+.events-wrap{
+    background-color: rgb(250,250,250);
+    padding: 20px 10px;
+    align-items: center;
+    border-radius: 10px;
+    margin-top: 2px;
+    transition: all .5s;
+    color:rgb(80,80,80);
+}
+.events-wrap:hover{
+    cursor: pointer;
+    padding:30px 10px;
+    background-color: rgb(240,240,240);
+    color:rgb(50,50,50);
+}
+.events-date div{
+    margin:0;
+    padding:0 10px;
+}
+.events-date{
+    text-align: center;
+}
+.events-day, .events-mon{
+    font-weight: bold;
+}
+.events-mon{
+    font-size: 18px;
+}
+.events-day{
+    font-size: 24px;
+}
+.events-desc{
+    margin-left:20px;
+}
+.events-desc p{
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+.events-desc legend{
+    font-size: 16px;
+}
+.events-icon{  
+    width: 60%;
+    text-align: center;
+    color: rgb(230,230,230);
+    transition: all .5s;
+}
+.events-icon:hover{
+    color:rgb(50,50,50);
+} 

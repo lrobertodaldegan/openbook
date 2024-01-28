@@ -1,0 +1,9 @@
+.social-icons{
+    color: rgb(210,210,210);
+    width: 50px;
+    cursor: pointer;
+    transition: all .5s;
+}
+.social-icons:hover{
+    color: rgb(150,150,150);
+}
