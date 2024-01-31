@@ -7,7 +7,7 @@ module.exports = function(app) {
     [
       verifyUser.checkDuplicateEmail,
     ],
-    controller.voluntairSignUp
+    controller.signUp
   );
 
   app.post(

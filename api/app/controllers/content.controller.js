@@ -17,12 +17,11 @@ exports.getVideos = (req, res) => {
     if(user.name !== 'admin')
       filter = {visibility:'Public'};
 
-    Video.find(filter).then(videos => {
+    Video.find(filter).exec().then(videos => {
       if(videos && videos.lenght > 0)
         res.status(200).send({videos});
-
-      res.status(204).send({message: 'No content!'});
-
+      else
+        res.status(204).send({message: 'No content!'});
     }).catch(err => errorHandler(err, res));
   }).catch(err => errorHandler(err, res));
 }
@@ -36,7 +35,7 @@ exports.newVideos = (req, res) => {
   });
 
   newVideo.save().then(video => {
-    res.status(201).send();
+    res.status(201).send(video);
   }).catch(err => errorHandler(err, res));
 }
 
@@ -47,7 +46,7 @@ exports.removeVideo = (req, res) => {
       Video.deleteOne({_id: video._id})
       .then(() => {
         
-        res.status(200).send({message:`Video (${req.params['demandId']}) deleted!`});  
+        res.status(200).send({message:`Video (${req.params['id']}) deleted!`});  
 
       }).catch(err => errorHandler(err, res));
     } else {

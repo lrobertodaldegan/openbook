@@ -10,4 +10,4 @@ const Video = mongoose.model(
   })
 );
 
-module.exports = Demand;
+module.exports = Video;

@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import LoginPage from "./pages/Login/LoginPage";
 import AppPage from "./pages/App/AppPage";
+import AdminPage from "./pages/Admin/AdminPage";
 import NotFoundPage from "./pages/NotFound/NotFoundPage";
 import './App.css';
 
@@ -8,9 +9,11 @@ import './App.css';
 function App() {
   const [c, setC] = useState(<></>);
 
-  const handleNavigation = (link) => {
+  const handleNavigation = (user, link) => {
     if(link === 'app'){
-      setC(<AppPage navHandler={handleNavigation}/>);
+      setC(<AppPage user={user} navHandler={handleNavigation}/>);
+    } else if(link === 'admin'){
+      setC(<AdminPage user={user} navHandler={handleNavigation}/>);
     } else if(link === '/'){
       setC(<LoginPage navHandler={handleNavigation}/>);
     } else {

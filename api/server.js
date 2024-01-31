@@ -10,7 +10,6 @@ app.use(express.urlencoded({ extended: true, limit:'50mb' }));
  
 //mongoose
 const db = require("./app/models");
-const Role = db.role;
  
 const dbConfig = require("./app/config/db.config");
  
@@ -21,7 +20,6 @@ db.mongoose
   })
   .then(() => {
     console.log("Successfully connect to MongoDB.");
-    initial();
   })
   .catch(err => {
     console.error("Connection error", err);
@@ -42,7 +40,7 @@ require('./app/routes/auth.routes')(app);
 require('./app/routes/content.routes')(app);
  
 // set port, listen for requests
-const PORT = 21017;
+const PORT = 21136;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

@@ -15,81 +15,22 @@ const errorHandler = (err, res) => {
   }
 }
 
-exports.institutionSignUp = (req, res) => {
+exports.signUp = (req, res) => {
   const user = new User({
     name: req.body.name,
     email: req.body.email,
-    phone: req.body.phone,
-    site: req.body.site,
-    contactEmail: req.body.contactEmail,
-    contactPhone: req.body.contactPhone,
     password: bcrypt.hashSync(req.body.password, 8),
-    resume: req.body.resume,
-    zipcode: req.body.zipcode,
-    address: req.body.address
   });
 
   user.save().then(user => {
-    Role.findOne({ name: "institution" }).then(role => {
-      user.role = role._id;
+    let successMsg = { message: `User ${user.name} was registered successfully!` };
 
-      user.save().then(user => {
-        let successMsg = { message: `User ${user.name} was registered successfully!` };
-
-        if(req.body.device){
-          const device = new Device({
-            deviceId: req.body.device.id,
-            uniqueId: req.body.device.uniqueId,
-            user: user._id
-          });
-  
-          device.save().then(device => res.status(201).send(successMsg))
-                        .catch(err => errorHandler(err, res));
-        } else {
-          res.status(201).send(successMsg);
-        }
-      }).catch(err => errorHandler(err, res));
-    }).catch(err => errorHandler(err, res));
-  }).catch(err => errorHandler(err, res));
-}
-
-exports.voluntairSignUp = (req, res) => {
-  const user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    phone: req.body.phone,
-    contactEmail: req.body.email,
-    contactPhone: req.body.phone,
-    password: bcrypt.hashSync(req.body.password, 8),
-    resume: req.body.resume,
-  });
-
-  user.save().then(user => {
-    Role.findOne({ name: "voluntair" }).then(role => {
-      user.role = role._id;
-
-      user.save().then(user => {
-        let successMsg = { message: `User ${user.name} was registered successfully!` };
-
-        if(req.body.device){
-          const device = new Device({
-            deviceId: req.body.device.id,
-            uniqueId: req.body.device.uniqueId,
-            user: user._id
-          });
-  
-          device.save().then(device => res.status(201).send(successMsg))
-                        .catch(err => errorHandler(err, res));
-        } else {
-          res.status(201).send(successMsg);
-        }
-      }).catch(err => errorHandler(err, res));
-    }).catch(err => errorHandler(err, res));
+    res.status(201).send(successMsg);
   }).catch(err => errorHandler(err, res));
 };
 
 exports.signin = (req, res) => {
-  User.findOne({email: req.body.email}).populate("role")
+  User.findOne({name: req.body.user})
       .exec()
       .then(user => {
         if (!user)
@@ -103,9 +44,7 @@ exports.signin = (req, res) => {
         if (!passwordIsValid)
           return res.status(401).send({ message: "Invalid Password!" });
 
-        var authorities = `ROLE_${user.role.name.toUpperCase()}`;
-
-        const token = jwt.sign({ id: user._id, role: authorities},
+        const token = jwt.sign({ id: user._id},
                                 config.secret,
                                 {
                                   algorithm: 'HS256',
@@ -117,7 +56,6 @@ exports.signin = (req, res) => {
 
         res.status(200).send({
           id: user._id,
-          role: authorities,
           token: token
         });
     }).catch(err => errorHandler(err, res));
