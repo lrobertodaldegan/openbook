@@ -72,9 +72,10 @@ export default function VideoList({navHandler=()=>null}) {
           <table className="table table-striped">
             <thead>
               <tr>
-                <th scope="col">Título</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Link</th>
+                <th scope="col" >Título</th>
+                <th scope="col" >Descrição</th>
+                <th scope="col" >Link</th>
+                <th scope='col' >Arquivo</th>
                 <th scope="col" className="center">
                   <a href='#' onClick={init}>
                     <FontAwesomeIcon icon={faRefresh} 

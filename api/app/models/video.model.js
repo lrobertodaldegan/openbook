@@ -6,6 +6,7 @@ const Video = mongoose.model(
     title: String,
     resume: String,
     url: String,
+    filePath: String,
     visibility:String,
   })
 );

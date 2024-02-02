@@ -33,7 +33,7 @@ export default function AdminPage({user=null, navHandler=()=>null}) {
         </div>
       </div>
       <div className="row">
-        <div className="col-10 offset-1">
+        <div className="col offset">
           <VideoList navHandler={navHandler}/>
         </div>
       </div>

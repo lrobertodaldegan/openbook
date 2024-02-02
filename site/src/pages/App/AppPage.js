@@ -2,11 +2,13 @@ import React, {useState, useEffect} from "react";
 import logo from '../../assets/img/logo.png';
 import Footer from "../../components/Footer/Footer";
 import Loader from "../../components/Loader/Loader";
+import Modal from "../../components/Modal/Modal";
 import { getVideos, logout } from "../../Utils/Rest";
 
 export default function AppPage({user=null, navHandler=()=>null}) {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState();
 
   const errorHandler = (e) => {
     console.log(e);
@@ -14,6 +16,11 @@ export default function AppPage({user=null, navHandler=()=>null}) {
     localStorage.clear();
 
     navHandler(null, '/');
+  }
+
+  const doDownload = (fileRef) => {
+    var win = window.open();
+    win.document.write(`<iframe src='${fileRef}' />`);
   }
 
   useEffect(() => {
@@ -26,6 +33,26 @@ export default function AppPage({user=null, navHandler=()=>null}) {
     
           for(let i=0; i< rs.data.videos.length; i++){
             let v = rs.data.videos[i];
+
+            let materialLink = <></>;
+
+            if(v.filePath && v.filePath !== null){
+              if(v.filePath.includes('.rar') 
+                  || v.filePath.includes('-zip') 
+                  || v.filePath.includes('compressed')) {
+                materialLink = (
+                  <a href='#' onClick={() => doDownload(v.filePath)}>
+                    Baixar material da aula
+                  </a>
+                );
+              } else {
+                materialLink = (
+                  <a href='#' onClick={() => setFile(v.filePath)}>
+                    Abrir material da aula
+                  </a>
+                );
+              }
+            }
     
             vs.push(
               <div className="video center col-md-4">
@@ -36,6 +63,8 @@ export default function AppPage({user=null, navHandler=()=>null}) {
     
                 <p><b>{v.title}</b></p>
                 <p>{v.resume}</p>
+
+                {materialLink}
               </div>
             );
           }
@@ -67,6 +96,21 @@ export default function AppPage({user=null, navHandler=()=>null}) {
     logout({}, errorHandler).then(() => errorHandler('logout'));
   }
 
+  const renderArquivo = () => {
+    if(file && file !== null){
+      return (
+        <Modal show={true} hideCloseBtn={false} 
+            closeAction={() => setFile()}
+            content={
+              <object className='app-file-content' data={file}></object>
+            }
+        />
+      );
+    } else {
+      return <></>
+    }
+  }
+
   const renderContent = () => {
     if(loading === true){
       return <Loader />
@@ -95,6 +139,7 @@ export default function AppPage({user=null, navHandler=()=>null}) {
         </div>
       </div>
       {renderContent()}
+      {renderArquivo()}
       <Footer/>
     </div>
   )

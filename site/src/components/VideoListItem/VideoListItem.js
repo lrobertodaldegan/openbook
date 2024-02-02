@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faFloppyDisk, faTrashAlt, faUpRightFromSquare} from '@fortawesome/free-solid-svg-icons';
+import {faDownload, faFloppyDisk, faTrashAlt, faUpRightFromSquare} from '@fortawesome/free-solid-svg-icons';
 import { deleteVideo, saveVideo } from "../../Utils/Rest";
 
 export default function VideoListItem({
@@ -13,6 +13,9 @@ export default function VideoListItem({
   const [title, setTitle] = useState(item?.title);
   const [subTitle, setSubTitle] = useState(item?.resume);
   const [link, setLink] = useState(item?.url);
+  const [file, setFile] = useState(item?.filePath);
+  const [uploadFile, setUploadFile] = useState();
+  const [loading, setLoading] = useState(false);
 
   const errorHandler = (e) => {
     console.log(e);
@@ -32,6 +35,8 @@ export default function VideoListItem({
     if(!title || !link){
       onError('É necessário informar título e link para cadastrar um vídeo!');
     } else {
+      setLoading(true);
+
       saveVideo(v, errorHandler).then((rs) => {
         if(rs.status === 201){
           onChange(v);
@@ -65,17 +70,41 @@ export default function VideoListItem({
     }
   }
 
-  const renderLinkAction = () => {
-    if(link && link !== null){
-      return (
-        <a href={link} target='_blank'>
-          <FontAwesomeIcon icon={faUpRightFromSquare} 
-              size={"1x"} className="icon-link"/>
-        </a>
-      );
+  const handleFileUpload = (e) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = function () {
+      setUploadFile(reader.result);
+    };
+    reader.onerror = function (error) {
+      console.log('Error: ', error);
+    };
+  }
+
+  const renderLinkAction = (type) => {
+    if(type === 'link'){
+      if(link && link !== null){
+        return (
+          <a href={link} target='_blank'>
+            <FontAwesomeIcon icon={faUpRightFromSquare} 
+                size={"1x"} className="icon-link"/>
+          </a>
+        );
+      }
     } else {
-      return <></>
+      if(file && file !== null){
+        return (
+          <p>Arquivo enviado com sucesso!</p>
+        );
+      } else {
+        return (
+          <input type="file" name="filetoupload"
+            onChange={(e) => handleFileUpload(e)}/>
+        )
+      }
     }
+
+    return <></>
   }
 
   const renderActions = () => {
@@ -86,11 +115,22 @@ export default function VideoListItem({
             size={"1x"} className="icon"/>
       );
     } else {
-      return (
-        <FontAwesomeIcon icon={faFloppyDisk} 
-            onClick={() => handleSave({title:title,resume:subTitle,url:link, visibility:'Public'})}
-            size={"1x"} className="icon-save"/>
-      );
+      if(loading === true){
+        return <p>Enviando...</p>
+      } else {
+        return (
+          <FontAwesomeIcon icon={faFloppyDisk} 
+              size={"1x"} className="icon-save"
+              onClick={() => {
+                handleSave({
+                  title:title,
+                  resume:subTitle,
+                  url:link,
+                  fileToUpload:uploadFile}
+                );
+              }}/>
+        );
+      }
     }
   }
 
@@ -99,7 +139,7 @@ export default function VideoListItem({
       <td>
         <input type='text'
             value={title}
-            onChange={(e) => {console.log(title); setTitle(e.target.value);}}
+            onChange={(e) => setTitle(e.target.value)}
             placeholder="Título do vídeo"/>
       </td>
       <td>
@@ -115,7 +155,10 @@ export default function VideoListItem({
             onBlur={handleLink}
             placeholder="Link do vídeo"/>
 
-        {renderLinkAction()}
+        {renderLinkAction('link')}
+      </td>
+      <td>
+        {renderLinkAction('file')}
       </td>
       <td className="center">
         {renderActions()}

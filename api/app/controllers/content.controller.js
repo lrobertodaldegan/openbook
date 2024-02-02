@@ -18,7 +18,7 @@ exports.getVideos = (req, res) => {
       filter = {visibility:'Public'};
 
     Video.find(filter).exec().then(videos => {
-      if(videos && videos.lenght > 0)
+      if(videos && videos.length > 0)
         res.status(200).send({videos});
       else
         res.status(204).send({message: 'No content!'});
@@ -31,6 +31,7 @@ exports.newVideos = (req, res) => {
     title: req.body.title,
     resume: req.body.resume,
     url: req.body.url,
+    filePath: req.body.fileToUpload,
     visibility: req.body.visibility ? req.body.visibility : 'Public'//or 'Hidden
   });
 
