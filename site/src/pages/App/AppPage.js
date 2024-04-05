@@ -53,15 +53,23 @@ export default function AppPage({user=null, navHandler=()=>null}) {
                 );
               }
             }
-    
-            vs.push(
-              <div className="video center col-md-4">
+            
+            let videoFrame = <></>;
+
+            if(v.url && v.url !== null && v.url.includes('http')){
+              videoFrame = (
                 <iframe src={v.url} 
-                    title={v.title} frameborder="0"  
+                    title={v.title} frameBorder="0"  
                     allowFullScreen='1'
                 />
+              );
+            }
+
+            vs.push(
+              <div className="video center col-md-6">
+                {videoFrame}
     
-                <p><b>{v.title}</b></p>
+                <h5>{v.title}</h5>
                 <p>{v.resume}</p>
 
                 {materialLink}
@@ -125,17 +133,19 @@ export default function AppPage({user=null, navHandler=()=>null}) {
 
   return (
     <div className="home">
-      <div className="row">
-        <div className="col">
-          <img src={logo} alt="Escola Open Book" className='logo'/>
+      <div className="headerr">
+        <div className="row">
+          <div className="col">
+            <img src={logo} alt="Escola Open Book" className='logo'/>
+          </div>
         </div>
-      </div>
-      <div className="row">
-        <div className="col">
-          <p style={{marginLeft:10}}>
-            Bem-vindo, {user}!
-            <a href='#' onClick={handleLogout}> sair</a>
-          </p>
+        <div className="row">
+          <div className="col">
+            <p style={{marginLeft:10}}>
+              Bem-vindo, {user}!
+              <a href='#' onClick={handleLogout}> sair</a>
+            </p>
+          </div>
         </div>
       </div>
       {renderContent()}

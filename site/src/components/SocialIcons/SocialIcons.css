@@ -1,10 +1,10 @@
 .social-icons{
-    color: rgb(58, 58, 58);
+    color: rgb(255, 255, 255);
     width: 50px;
     cursor: pointer;
     transition: all .5s;
     margin: 10px 0px;
 }
 .social-icons:hover{
-    color: rgb(0, 0, 0);
+    color: rgb(63, 63, 63);
 }

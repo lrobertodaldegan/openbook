@@ -14,6 +14,11 @@
 
 body {
   overflow-x: hidden;
+  color:#fff;
+  background-color: #000;
+}
+img {
+  filter: invert();
 }
 a,
 a:active{
@@ -53,6 +58,9 @@ legend{
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+.headerr {
+  margin-bottom: 30px;
 }
 .icon-load{
   -webkit-animation:spin 1s linear infinite;
@@ -118,9 +126,15 @@ legend{
 .home{
   padding:0 10px;
 }
+.home .video{
+  height: 100%;
+  margin-bottom: 40px;
+}
 .home iframe{
   width: 95%;
+  height: 300px;
   border-radius: 10px;
+  margin-bottom: 20px;
 }
 .home .video p{
   text-align: justify;
