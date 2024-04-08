@@ -147,9 +147,13 @@ legend{
   color: #d50000;
   transition: all .5s;
 }
+.home .table th,
+.home .table td,
+.home .table td p,
 .home .table .icon:hover,
-.home .table .icon-save{
-  color: #000;
+.home .table .icon-save,
+.home .table a{
+  color: #fff;
   cursor: pointer;
 }
 .home .table input{
@@ -157,7 +161,8 @@ legend{
   margin-right: 10px;
   border-radius: 5px;
   border: 1px solid #e0e0e0;
-  
+  color:#fff;
+  background-color: #000;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
